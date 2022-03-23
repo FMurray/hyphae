@@ -1,5 +1,6 @@
-const mqtt = require("mqtt");
-const express = require("express");
+import mqtt from "mqtt";
+import express from "express";
+import websockets from "./websockets";
 
 const client = mqtt.connect("tcp://localhost:1883");
 
@@ -8,6 +9,7 @@ const port = "8000";
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 
 client.on("connect", function () {
   client.subscribe("presence", function (err) {
@@ -23,6 +25,7 @@ client.on("message", function (topic, message) {
   client.end();
 });
 
+websockets(app);
 
 app.get("/", (req, res) => {
     res.send("Hello world");

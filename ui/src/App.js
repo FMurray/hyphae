@@ -1,6 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useState } from "react";
+import { w3cwebsocket as W3CWebSocket } from "websocket";
 
 function App() {
   const [state, setState] = useState([]);
