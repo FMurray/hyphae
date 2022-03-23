@@ -1,19 +1,31 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useState } from "react";
-import { w3cwebsocket as W3CWebSocket } from "websocket";
+
+// const socket = new WebSocket('ws://localhost:8000/websockets');
+// // Connection opened
+// socket.addEventListener('open', function (event) {
+//     socket.send('Hello Server!');
+// });
+
+// // Listen for messages
+// socket.addEventListener('message', function (event) {
+//     console.log('Message from server ', event.data);
+// });
 
 function App() {
-  const [state, setState] = useState([]);
-  useEffect(() => {
-    fetch("http://localhost:8000", {
-      mode: "no-cors",
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-      },
-    }).then((res) => setState(res.data));
-  });
+    const [state, setState] = useState([]);
+    useEffect(() => {
+        fetch("http://localhost:8000", {
+        mode: "no-cors",
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+        },
+        }).then((res) => setState(res.data));
+    });
+
+    console.log("hey")
 
 	const publish = () => {
 		fetch("http://localhost:8000/publish", {
@@ -22,6 +34,9 @@ function App() {
 			headers: {
 				Accept: "application/json",
 			},
+            body: {
+                "hi": "DAN"
+            }
 		});
 	}
 

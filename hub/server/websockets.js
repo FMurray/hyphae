@@ -1,9 +1,9 @@
 
 
-import WebSocket from "ws";
+import { WebSocketServer } from "ws";
 
-websockets = (expressServer) => {
-  const websocketServer = new WebSocket.Server({
+export default async (expressServer) => {
+  const websocketServer = new WebSocketServer({
     noServer: true,
     path: "/websockets",
   });
@@ -33,5 +33,3 @@ websockets = (expressServer) => {
 
   return websocketServer;
 };
-
-export default websockets;

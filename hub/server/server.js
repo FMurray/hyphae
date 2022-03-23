@@ -1,6 +1,6 @@
 import mqtt from "mqtt";
 import express from "express";
-import websockets from "./websockets";
+import websockets from "./websockets.js";
 
 const client = mqtt.connect("tcp://localhost:1883");
 
@@ -32,6 +32,7 @@ app.get("/", (req, res) => {
 })
 
 app.post("/publish", (req, res) => {
+    console.log("req", req.body);
     client.publish("presence", req.body.message);
     res.send("Published");
 })
