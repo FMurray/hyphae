@@ -24,13 +24,15 @@ services:
     stdin_open: true
     environment:
       - CHOKIDAR_USEPOLLING=true
-    build:
-      dockerfile: Dockerfile
-      context: ./ui
+      - NODE_ENV=development
+      - FAST_REFRESH=false
+    build: ./ui
     volumes:
       - /app/node_modules
       - ./ui:/app
+    command: npm start
     ports: 
       - "3000:3000"
+      - "35729:35729"
 networks:
   localnet:

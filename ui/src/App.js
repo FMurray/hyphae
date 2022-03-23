@@ -1,20 +1,15 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { useEffect, useState } from "react";
-
-// const socket = new WebSocket('ws://localhost:8000/websockets');
-// // Connection opened
-// socket.addEventListener('open', function (event) {
-//     socket.send('Hello Server!');
-// });
-
-// // Listen for messages
-// socket.addEventListener('message', function (event) {
-//     console.log('Message from server ', event.data);
-// });
+import { useEffect, useState, useRef } from "react";
 
 function App() {
     const [state, setState] = useState([]);
+    const webSocket = useRef(null); 
+
+    console.log("hey now")
+    
+    console.log("something else")
+
     useEffect(() => {
         fetch("http://localhost:8000", {
         mode: "no-cors",
@@ -25,7 +20,13 @@ function App() {
         }).then((res) => setState(res.data));
     });
 
-    console.log("hey")
+    useEffect(() => {
+        webSocket.current = new WebSocket("ws://localhost:8000/websockets");
+        webSocket.current.onmessage = (message) => {
+            console.log("message", message);
+        };
+        return () => webSocket.current.close();
+    }, []);
 
 	const publish = () => {
 		fetch("http://localhost:8000/publish", {
@@ -39,7 +40,7 @@ function App() {
             }
 		});
 	}
-
+    
   return (
     <div className="App">
       <header className="App-header">

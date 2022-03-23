@@ -9,6 +9,7 @@ export default async (expressServer) => {
   });
 
   expressServer.on("upgrade", (request, socket, head) => {
+    console.log("upgrade")
     websocketServer.handleUpgrade(request, socket, head, (websocket) => {
       websocketServer.emit("connection", websocket, request);
     });
