@@ -1,4 +1,4 @@
-import logo from "./favicon.png";
+import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useState, useRef } from "react";
 
@@ -46,7 +46,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          let's get Hyphae in here.
+          Edit <code>src/App.js</code> and save to reload.
           {state}
         </p>
         <button onClick={publish}>Test Publish</button>
